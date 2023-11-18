@@ -1,4 +1,4 @@
-Repository for launchschool JS101 Programming Foundations with JavaScript: Basics
+Repository for launchschool **JS101 Programming Foundations with JavaScript: Basics**
 
 Each lesson will have it's own directory with the assignments located within.
 
