@@ -1,0 +1,21 @@
+{
+  "en": {
+    "greeting": "Welcome to Calculator!",
+    "firstNumber": "What's the first number?",
+    "secondNumber": "What's the second number?",
+    "operation": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "result": "The result is: ",
+    "anotherCalc": "Would you like to perform another calculation? \nYes or No",
+    "invalidOperation": "Must choose 1, 2, 3 or 4",
+    "invalidNumber": "Hmm... that doesn't look like a valid number."
+  },
+  "es": {
+
+  },
+  "ru": {
+
+  },
+  "ch": {
+    
+  }
+}

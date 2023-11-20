@@ -4,62 +4,90 @@
 // Perform the operation on the two numbers.
 // Print the result to the terminal.
 
+
+//readline var and functions for game
 const readline = require("readline-sync");
+const obj = require('./calculator_messages.json');
+
+let calculationCounter = 0;
 
 let prompt = (message) => {
   console.log(`=> ${message}`);
+};
+
+let translator = (message, lang = "en") => {
+  return obj[lang][message];
 };
 
 let invalidNumber = (number) => {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 };
 
-prompt("Welcome to Calculator!");
+let checkNumber = (num) => {
+  while (invalidNumber(num)) {
+    prompt(translator("invalidNumber"));
+    num = readline.question();
+  }
+  return num;
+};
 
-prompt("What's the first number?");
-let number1 = readline.question();
+let checkOperation = (oper) => {
+  while (!['1', '2', '3', '4'].includes(oper)) {
+    prompt(translator("invalidOperation"));
+    oper = readline.question();
+  }
+};
 
-while (invalidNumber(number1)) {
-  prompt("Hmm... that doesn't look like a valid number.");
-  number1 = readline.question();
-}
+let performOperation = (validOper, num1, num2) => {
+  switch (validOper) {
+    case '1':
+      return Number(num1) + Number(num2);
+    case '2':
+      return Number(num1) - Number(num2);
+    case '3':
+      return Number(num1) * Number(num2);
+    case '4':
+      return Number(num1) / Number(num2);
+  }
+  return null;
+};
 
-prompt("What's the second number?");
-let number2 = readline.question();
+//new feature - another calculation function
 
-while (invalidNumber(number2)) {
-  prompt("Hmm... that doesn't look like a valid number.");
-  number2 = readline.question();
-}
+let anotherCalculation = () => {
+  prompt(translator("anotherCalc"));
+  let answer = readline.question().toLowerCase();
+  //add checks to validate answer
 
-//console.log(`${number1} ${number2}`);
+  if (answer.includes("y")) {
+    // eslint-disable-next-line no-use-before-define
+    startCalculator();
+  }
+};
 
-prompt("What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide");
-let operation = readline.question();
+let startCalculator = () => {
+  prompt(translator("greeting", "es"));
 
-while (!['1', '2', '3', '4'].includes(operation)) {
-  prompt('Must choose 1, 2, 3 or 4');
-  operation = readline.question();
-}
+  prompt(translator("firstNumber", "es"));
+  let number1 = readline.question();
+  number1 = checkNumber(number1);
 
-let output;
-switch (operation) {
-  // '1' represents addition
-  case '1':
-    output = Number(number1) + Number(number2);
-    break;
-  // '2' represents subtraction
-  case '2':
-    output = Number(number1) - Number(number2);
-    break;
-  // 3 represents multiplication
-  case '3':
-    output = Number(number1) * Number(number2);
-    break;
-  // 4 represents division
-  case '4':
-    output = Number(number1) / Number(number2);
-    break;
-}
+  prompt(translator("secondNumber"));
+  let number2 = readline.question();
+  number2 = checkNumber(number2);
 
-prompt(`The result is: ${output}`);
+  prompt(obj.en.operation);
+  let operation = readline.question();
+  checkOperation(operation);
+
+  let output = performOperation(operation, number1, number2);
+  prompt(translator("result") + output);
+
+  calculationCounter++;
+  anotherCalculation();
+};
+
+//start calculator
+
+startCalculator();
+prompt(`You performed ${calculationCounter} calculations. Thank you and have a nice day.`);
