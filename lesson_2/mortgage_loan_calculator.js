@@ -1,21 +1,21 @@
 const readline = require("readline-sync");
-const OBJ = require('./mortgage_messages.json');
+const MESSAGES = require('./mortgage_messages.json');
 
 let prompt = (message) => {
   console.log(`=> ${message}`);
 };
 
 //function - validate user input as number
-let checkNumber = (num) => {
+let validateUserInput = (num) => {
   while (isNaN(num) || num.trimStart() === "") {
-    prompt(OBJ.invalidNumber);
+    prompt(MESSAGES.invalidNumber);
     num = readline.question();
   }
   return Number(num);
 };
 
 //function - converts term to month, APR to MPR, and calculate payment
-let paymentFormula = (amount, apr, term) => {
+let monthlyPaymentCalculation = (amount, apr, term) => {
   term *= 12;
   apr = (apr / 100) / 12;
   let result = amount * (apr / (1 - Math.pow((1 + apr), (-term))));
@@ -23,21 +23,21 @@ let paymentFormula = (amount, apr, term) => {
 };
 
 //function - starts program and gets user input
-let startMortgage = () => {
-  prompt(OBJ.loanAmount);
+let startMortgageProgram = () => {
+  prompt(MESSAGES.loanAmount);
   let loanAmount = readline.question();
-  loanAmount = checkNumber(loanAmount);
+  loanAmount = validateUserInput(loanAmount);
 
-  prompt(OBJ.APR);
+  prompt(MESSAGES.APR);
   let APR = readline.question();
-  APR = checkNumber(APR);
+  APR = validateUserInput(APR);
 
-  prompt(OBJ.loanTerm);
+  prompt(MESSAGES.loanTerm);
   let loanTerm = readline.question();
-  loanTerm = checkNumber(loanTerm);
+  loanTerm = validateUserInput(loanTerm);
 
-  let monthlyPayment = paymentFormula(loanAmount, APR, loanTerm);
-  prompt(OBJ.monthlyPaymentMessage + monthlyPayment);
+  let monthlyPayment = monthlyPaymentCalculation(loanAmount, APR, loanTerm);
+  prompt(MESSAGES.monthlyPaymentMessage + monthlyPayment);
 };
 
-startMortgage();
+startMortgageProgram();
