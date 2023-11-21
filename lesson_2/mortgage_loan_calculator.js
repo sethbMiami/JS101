@@ -14,7 +14,7 @@ let validateUserInput = (num) => {
   return Number(num);
 };
 
-//function - converts term to month, APR to MPR, and calculate payment
+//function - calculates monthly payment
 let monthlyPaymentCalculation = (amount, apr, term) => {
   term *= 12;
   apr = (apr / 100) / 12;
