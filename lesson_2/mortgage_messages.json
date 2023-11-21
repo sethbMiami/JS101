@@ -1,0 +1,7 @@
+{
+  "loanAmount": "Please enter the loan amount:",
+  "APR": "Please enter the Annual Percentage Rate (APR):",
+  "loanTerm": "Please enter the loan duration in years (15, 20, 30):",
+  "invalidNumber": "Please input a valid number:",
+  "monthlyPaymentMessage": "Your monthly payment is $"
+}
