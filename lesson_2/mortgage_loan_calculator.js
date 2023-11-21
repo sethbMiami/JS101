@@ -28,6 +28,7 @@ let anotherCalculation = () => {
   let userResponse = readline.question().toLowerCase();
 
   if (userResponse.includes("y")) {
+    // would most likely store this function and others in a different file
     // eslint-disable-next-line no-use-before-define
     startMortgageProgram();
   }
