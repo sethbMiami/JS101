@@ -6,12 +6,12 @@ let prompt = (message) => {
 };
 
 //function - validate user input as number
-let validateUserInput = (num) => {
-  while (isNaN(num) || num.trimStart() === "") {
+let validateNumberInput = (num) => {
+  while (isNaN(num) || num.trimStart() === "" || num === "0") {
     prompt(MESSAGES.invalidNumber);
     num = readline.question();
   }
-  return Number(num);
+  return Math.abs(Number(num));
 };
 
 //function - calculates monthly payment
@@ -22,22 +22,37 @@ let monthlyPaymentCalculation = (amount, apr, term) => {
   return Math.round(result * 100) / 100;
 };
 
-//function - starts program and gets user input
+//function - asks user if they want to perform another calculation
+let anotherCalculation = () => {
+  prompt(MESSAGES.anotherCalculationMessage);
+  let userResponse = readline.question().toLowerCase();
+
+  if (userResponse.includes("y")) {
+    // eslint-disable-next-line no-use-before-define
+    startMortgageProgram();
+  }
+};
+
+//function - starts program and calls user input and calculate functions
 let startMortgageProgram = () => {
   prompt(MESSAGES.loanAmount);
   let loanAmount = readline.question();
-  loanAmount = validateUserInput(loanAmount);
+  loanAmount = validateNumberInput(loanAmount);
 
   prompt(MESSAGES.APR);
   let APR = readline.question();
-  APR = validateUserInput(APR);
+  APR = validateNumberInput(APR);
 
   prompt(MESSAGES.loanTerm);
   let loanTerm = readline.question();
-  loanTerm = validateUserInput(loanTerm);
+  loanTerm = validateNumberInput(loanTerm);
 
   let monthlyPayment = monthlyPaymentCalculation(loanAmount, APR, loanTerm);
   prompt(MESSAGES.monthlyPaymentMessage + monthlyPayment);
+
+  anotherCalculation();
 };
 
+prompt(MESSAGES.welcomeMessage);
 startMortgageProgram();
+prompt(MESSAGES.closingMessage);

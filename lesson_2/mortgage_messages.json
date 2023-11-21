@@ -1,7 +1,10 @@
 {
+  "welcomeMessage": "Welcome to the Mortgage Calculator where we calculate your monthly payment. \n=> Note: Any negative numbers entered will be updated to positive, and the number 0 won't be accepted.",
   "loanAmount": "Please enter the loan amount:",
   "APR": "Please enter the Annual Percentage Rate (APR):",
-  "loanTerm": "Please enter the loan duration in years (15, 20, 30):",
+  "loanTerm": "Please enter the loan duration in years i.e.(15, 20, 30):",
   "invalidNumber": "Please input a valid number:",
-  "monthlyPaymentMessage": "Your monthly payment is $"
+  "monthlyPaymentMessage": "Your monthly payment is $",
+  "anotherCalculationMessage": "Would you like to do another calculation? (Yes or No):",
+  "closingMessage": "Thank you and have a nice day."
 }
