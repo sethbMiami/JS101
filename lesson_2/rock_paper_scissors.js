@@ -1,5 +1,6 @@
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard'];
+const QUICK_CHOICE = ['r', 'p', 's', 'sp', 'l'];
 
 let playAgainLoop = true;
 
@@ -7,7 +8,22 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-// eslint-disable-next-line complexity
+function convertQuickToValid(quickChoice) {
+  switch (quickChoice) {
+    case 'r':
+      return 'rock';
+    case 'p':
+      return 'paper';
+    case 's':
+      return 'scissors';
+    case 'sp':
+      return 'spock';
+    case 'l':
+      return 'lizard';
+  }
+  return null;
+}
+
 function displayWinner(choice, computerChoice) {
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
 
@@ -26,17 +42,22 @@ function displayWinner(choice, computerChoice) {
 
 while (playAgainLoop) {
   prompt(`Choose one: ${VALID_CHOICES.join(', ')}`);
-  let choice = readline.question();
+  prompt("Quick Choice: 'r' for rock, 'p' for paper, 's' for scissors, 'sp' for spock, or 'l' for lizard");
+  let choice = readline.question().toLowerCase();
 
-  while (!VALID_CHOICES.includes(choice)) {
+  while (!VALID_CHOICES.includes(choice) && !QUICK_CHOICE.includes(choice)) {
     prompt("That's not a valid choice");
-    choice = readline.question();
+    choice = readline.question().toLowerCase();
   }
+
+  if (QUICK_CHOICE.includes(choice)) {
+    choice = convertQuickToValid(choice);
+  }
+
+  console.clear();
 
   let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
   let computerChoice = VALID_CHOICES[randomIndex];
-
-  prompt(`You chose ${choice}, computer chose ${computerChoice}`);
 
   displayWinner(choice, computerChoice);
 
@@ -50,4 +71,5 @@ while (playAgainLoop) {
   if (answer[0] !== 'y') {
     playAgainLoop = false;
   }
+  console.clear();
 }
