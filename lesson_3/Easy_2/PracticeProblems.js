@@ -32,7 +32,7 @@ let famousWords = "seven years ago...";
 console.log("Four score and " + famousWords);
 console.log(`Four score and ${famousWords}`);
 
-//Given an array of numbers [1, 2, 3, 4, 5], mutate the array by removing the number at index 2, 
+//Given an array of numbers [1, 2, 3, 4, 5], mutate the array by removing the number at index 2,
 //so that the array becomes [1, 2, 4, 5].
 
 let array1 = [1, 2, 3, 4, 5];
