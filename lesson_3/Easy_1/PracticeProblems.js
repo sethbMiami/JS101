@@ -63,3 +63,62 @@ console.log(newAdvice);
 
 // Expected return value:
 // => 'Few things in life are as important as '
+
+//scrap paper
+
+let arrayMutate = [1, 2, 3];
+arrayMutate.pop();
+console.log(arrayMutate);
+
+let string1 = 'me';
+
+let mutateString = () => {
+  string1 = 'you';
+};
+
+mutateString();
+console.log(string1);
+
+//- **Excercise:**
+//Create a function that takes two arguments: starting number and end number and returns an array with numbers 
+//starting from `startNumber` and ending on `endNumber`.
+
+const createArray = (startNum, endNum) => {
+  let array = [];
+
+  while (startNum <= endNum) {
+    array.push(startNum);
+    startNum++;
+  }
+
+  return array;
+};
+
+console.log(createArray(2, 20));
+
+//Create a function that takes a string as an argument and return an object with letters of the string and 
+//their occurrence as properties:  eg: 'abbab' `{a:2, b: 3}`
+
+const countOccurencies = (str) => {
+  let keyIndex = 0;
+  let keyArray = [];
+  let valuesArray = [];
+
+  while (keyIndex < str.length) {
+    let letter = str[keyIndex];
+    let letterRegExp = new RegExp(letter, "g");
+
+    if (keyArray.indexOf(letter) === -1) {
+      keyArray.push(letter);
+      let count = (str.match(letterRegExp)).length;
+      console.log(count);
+      valuesArray.push(count);
+    }
+    keyIndex++;
+  }
+
+  return Object.assign(...keyArray.map((key, value) => ({
+    [key]: valuesArray[value] })));
+};
+
+console.log(countOccurencies('aabccabcbaaaaab'));
