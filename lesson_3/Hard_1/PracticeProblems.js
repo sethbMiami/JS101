@@ -84,3 +84,6 @@ function isDotSeparatedIpAddress(inputString) {
 }
 
 console.log(isDotSeparatedIpAddress("w.h.a.t"));
+console.log(isDotSeparatedIpAddress("1.2.3.4"));
+console.log(isDotSeparatedIpAddress("255.55.41.1"));
+
